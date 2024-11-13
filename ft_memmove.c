@@ -6,7 +6,7 @@
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:25:08 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/12 10:58:28 by allefran         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:02:52 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,36 @@
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t			i;
-	unsigned char	*tmp;
 
-	i = 0;
-	if (!dest && !src && n)
+	if (src < dest)
 	{
-		return (NULL);
+		i = 0;
+		while (i < n)
+		{
+			((char *) dest)[n - i - 1] = ((char *) src)[n - i - 1];
+			i++;
+		}
+		return (dest);
 	}
-	while (i < n)
-	{
-		*(unsigned char *)(dest + i) = *(unsigned char *)(tmp + i);
-		i++;
-	}
-	if (tmp > src)
-	{
-	}
+	if (src == dest)
+		return (dest);
 	else
 	{
-		src = tmp;
+		i = 0;
+		while (i < n)
+		{
+			*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
+			i++;
+		}
 	}
 	return (dest);
 }
 
 // int	main()
 // {
-// 	char	source[] = "salut je suis Alexandre";
-// 	char	destination[2];
-// 	ft_memmove(destination, source, 5);
-// 	printf("%s", destination);
+// 	char	*source = "salut je suis Alexandre";
+// 	char 	*destination;
+
+// 	printf("original function: %s\n", (char*)memmove(source + 2, source, 5));
+// 	printf("my function: %s", (char *)ft_memmove(source + 2, source, 5));
 // }

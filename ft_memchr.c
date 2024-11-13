@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:12:39 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/12 14:24:37 by allefran         ###   ########.fr       */
+/*   Created: 2024/11/13 08:57:05 by allefran          #+#    #+#             */
+/*   Updated: 2024/11/13 10:32:48 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (i < n)
 	{
-		if (s[i] == (unsigned char)c)
+		if ((*(unsigned char *)(s + i)) == (unsigned char)(c))
 		{
-			return ((char *)s + i);
+			return ((void *)(s + i));
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
-// int	main()
+// int	main(void)
 // {
-// 	char	string[] = "Salut je suis Alex";
-// 	int		character = 'A';
-// 	printf("my function: %s\n", ft_strchr(string, character));
-// 	printf("original: %s\n", strchr(string, character));
+// 	char	*string = "salut je suis alexandre";
+// 	char	character = 'z';
+
+// 	printf("original function: %p\n", memchr(string, character, 23));
+// 	printf("my function: %p\n", ft_memchr(string, character, 23));
 
 // 	return (0);
 // }

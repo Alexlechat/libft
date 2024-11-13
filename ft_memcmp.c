@@ -1,39 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:12:39 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/12 14:24:37 by allefran         ###   ########.fr       */
+/*   Created: 2024/11/13 10:34:56 by allefran          #+#    #+#             */
+/*   Updated: 2024/11/13 11:06:49 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	c1;
+	unsigned char	c2;
 
 	i = 0;
-	while (s[i])
+	while (i < n)
 	{
-		if (s[i] == (unsigned char)c)
+		c1 = *(unsigned char *)(s1 + i);
+		c2 = *(unsigned char *)(s2 + i);
+		if (c1 != c2)
 		{
-			return ((char *)s + i);
+			return (c1 - c2);
 		}
 		i++;
 	}
 	return (0);
 }
 
-// int	main()
+// int	main(void)
 // {
-// 	char	string[] = "Salut je suis Alex";
-// 	int		character = 'A';
-// 	printf("my function: %s\n", ft_strchr(string, character));
-// 	printf("original: %s\n", strchr(string, character));
+// 	char	*string1 = "salut je suis alex";
+// 	char	*string2 = "salut je suis bob";
+// 	int	n = 17;
 
+// 	printf("original function: %d\n", memcmp(string1, string2, n));
+// 	printf("my function: %d\n", ft_memcmp(string1, string2, n));
 // 	return (0);
 // }
