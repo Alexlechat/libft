@@ -6,7 +6,7 @@
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:18:22 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/13 15:34:53 by allefran         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:26:21 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,24 @@ char	*ft_strrchr(const char *s, int c)
 {
 	size_t	i;
 
-	i = ft_strlen(s) - 1;
+	i = ft_strlen(s);
 	if (i == 0)
 	{
 		return (NULL);
 	}
-	while (i > 0)
+	i--;
+	if ((char)c == '\0')
+	{
+		return ((char *)(&s[i + 1]));
+	}
+	while (i >= 0)
 	{
 		if (s[i] == (char)c)
 		{
 			return ((char *)(s + i));
 		}
+		if (i == 0)
+			return (NULL);
 		i--;
 	}
 	return (NULL);
@@ -34,10 +41,12 @@ char	*ft_strrchr(const char *s, int c)
 
 // int	main(void)
 // {
-// 	char	string[] = "je recherche la derniere occurence";
-// 	char	character = 'c';
+// 	char	string[] = "";
+// 	char	character = '0';
 
 // 	printf("original: %p\n", strrchr(string, character));
-// 	printf("my function: %p\n", ft_strrchr(string, character));
+// 	printf("my function: %s\n", ft_strrchr(string, character));
+
+// 	printf("adrese: %p", &string[1]);
 // 	return (0);
 // }

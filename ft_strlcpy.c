@@ -6,7 +6,7 @@
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:13:51 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/13 13:10:16 by allefran         ###   ########.fr       */
+/*   Updated: 2024/11/14 11:40:57 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,31 @@
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	size_t	len;
+	size_t	i;
 
-	if (!dest || !src || size == 0)
+	if (size == 0)
 	{
-		return (0);
+		return (ft_strlen(src));
 	}
-	len = 0;
-	while (len < size - 1 && src[len] != '\0')
+	i = 0;
+	while (i < (size - 1) && src[i] != '\0')
 	{
-		dest[len] = src[len];
-		len++;
+		dest[i] = src[i];
+		i++;
 	}
-	if (size > 0)
-	{
-		dest[len] = '\0';
-	}
-	while (src[len] != '\0')
-	{
-		len++;
-	}
-	return (len);
+	dest[i] = '\0';
+	return (ft_strlen(src));
 }
 
 //compile: cc -lbsd ft_strlcpy.c
 // int	main(void)
 // {
-// 	char	source[] = "aaa";
+// 	char	source[] = "lorem ipsum dolor sit amet";
 // 	char	destination[100];
-// 	int	n = 5;
+// 	int	n = 0;
 
 // 	strlcpy(destination, source, n);
-// 	printf("original function: %zu\n", strlcpy(destination, source, n));
+// 	printf("original function: %d\n", strlcpy(destination, source, n));
 // 	printf("original destination: %s\n", destination);
 
 // 	ft_strlcpy(destination, source, n);

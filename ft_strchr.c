@@ -6,7 +6,7 @@
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:12:39 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/12 14:24:37 by allefran         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:45:44 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,17 @@ char	*ft_strchr(const char *s, int c)
 		}
 		i++;
 	}
-	return (0);
+	if ((unsigned char)c == '\0')
+	{
+		return ((char *)s + i);
+	}
+	return (NULL);
 }
 
 // int	main()
 // {
-// 	char	string[] = "Salut je suis Alex";
-// 	int		character = 'A';
+// 	char	string[] = "teste";
+// 	int		character = '\0';
 // 	printf("my function: %s\n", ft_strchr(string, character));
 // 	printf("original: %s\n", strchr(string, character));
 

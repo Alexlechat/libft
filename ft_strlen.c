@@ -6,7 +6,7 @@
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:01:57 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/13 12:56:58 by allefran         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:01:04 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	ft_strlen(const char *s)
 
 // int main ()
 // {
-// 	char string[] = "alexandre";
-// 	printf("length: %d\n", ft_strlen(string));
+// 	char string[] = "";
+// 	printf("length: %zu\n", ft_strlen(string));
 // 	return (0);
 // }
