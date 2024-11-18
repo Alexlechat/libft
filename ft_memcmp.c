@@ -6,7 +6,7 @@
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:34:56 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/13 11:06:49 by allefran         ###   ########.fr       */
+/*   Updated: 2024/11/18 08:54:34 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 // int	main(void)
 // {
 // 	char	*string1 = "salut je suis alex";
-// 	char	*string2 = "salut je suis bob";
+// 	char	*string2 = "salut je suis zob";
 // 	int	n = 17;
 
 // 	printf("original function: %d\n", memcmp(string1, string2, n));

@@ -1,54 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 13:18:22 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/18 11:38:54 by allefran         ###   ########.fr       */
+/*   Created: 2024/11/18 13:35:07 by allefran          #+#    #+#             */
+/*   Updated: 2024/11/18 14:19:48 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strdup(const char *s)
 {
-	size_t	i;
+	char	*dup_s;
+	int		i;
 
-	i = ft_strlen(s);
-	if (i == 0)
-	{
-		if (c == 0)
-			return ((char *)s);
+	dup_s = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (dup_s == NULL)
 		return (NULL);
-	}
-	i--;
-	if ((char)c == '\0')
+	i = 0;
+	while (s[i] != '\0')
 	{
-		return ((char *)(&s[i + 1]));
+		dup_s[i] = s[i];
+		i++;
 	}
-	while (i >= 0)
-	{
-		if (s[i] == (char)c)
-		{
-			return ((char *)(s + i));
-		}
-		if (i == 0)
-			return (NULL);
-		i--;
-	}
-	return (NULL);
+	dup_s[i] = '\0';
+	return (dup_s);
 }
-
 // int	main(void)
 // {
 // 	char	string[] = "";
-// 	char	character = '0';
 
-// 	printf("original: %p\n", strrchr(string, character));
-// 	printf("my function: %s\n", ft_strrchr(string, character));
-
-// 	printf("adrese: %p", &string[1]);
+// 	printf("My function: %p\n",ft_strdup(string));
+// 	printf("Originale: %p\n",strdup(string));
 // 	return (0);
 // }
