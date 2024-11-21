@@ -1,43 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:12:39 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/20 08:58:10 by allefran         ###   ########.fr       */
+/*   Created: 2024/11/21 12:52:18 by allefran          #+#    #+#             */
+/*   Updated: 2024/11/21 14:45:07 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	i;
+	char			*array;
+	unsigned int	i;
 
+	if (!s || !f)
+		return (NULL);
+	array = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!array)
+		return (NULL);
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == (unsigned char)c)
-		{
-			return ((char *)s + i);
-		}
+		array[i] = f(i, s[i]);
 		i++;
 	}
-	if ((unsigned char)c == '\0')
-	{
-		return ((char *)s + i);
-	}
-	return (NULL);
+	array[i] = '\0';
+	return (array);
 }
 
 // int	main()
 // {
-// 	char	string[] = "teste";
-// 	int		character = '\0';
-// 	printf("my function: %s\n", ft_strchr(string, character));
-// 	printf("original: %s\n", strchr(string, character));
+// 	char *s = "alexandre";
 
-// 	return (0);
 // }
