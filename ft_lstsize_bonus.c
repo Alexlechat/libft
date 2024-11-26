@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:12:39 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/26 10:15:41 by allefran         ###   ########.fr       */
+/*   Created: 2024/11/25 10:23:54 by allefran          #+#    #+#             */
+/*   Updated: 2024/11/25 10:35:20 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_lstsize(t_list *lst)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (s[i])
+	while (lst != NULL)
 	{
-		if (s[i] == (unsigned char)c)
-		{
-			return ((char *)s + i);
-		}
 		i++;
+		lst = lst->next;
 	}
-	if ((unsigned char)c == '\0')
-	{
-		return ((char *)s + i);
-	}
-	return (NULL);
+	return (i);
 }
-
-// int	main()
-// {
-// 	char	string[] = "teste";
-// 	int		character = '\0';
-// 	printf("my function: %s\n", ft_strchr(string, character));
-// 	printf("original: %s\n", strchr(string, character));
-
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:59:29 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/21 14:09:48 by allefran         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:00:53 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	ft_putendl_fd(char *s, int fd)
 	int	i;
 
 	i = 0;
+	if (!s)
+	{
+		write(2, "ERROR", 6);
+		return ;
+	}
 	while (s[i])
 	{
 		write(fd, &s[i], 1);

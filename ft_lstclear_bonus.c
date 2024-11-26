@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 14:11:01 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/26 11:26:21 by allefran         ###   ########.fr       */
+/*   Created: 2024/11/25 12:19:11 by allefran          #+#    #+#             */
+/*   Updated: 2024/11/25 12:31:49 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	long	nb;
+	t_list	*temp;
 
-	if (fd < 0)
+	if (!lst || !del)
 		return ;
-	nb = n;
-	if (nb < 0)
+	while (*lst != NULL)
 	{
-		ft_putchar_fd('-', fd);
-		nb = -nb;
+		temp = (*lst)->next;
+		del((*lst)->content);
+		free(*lst);
+		*lst = temp;
 	}
-	if (nb >= 10)
-	{
-		ft_putnbr_fd(nb / 10, fd);
-	}
-	ft_putchar_fd((nb % 10) + '0', fd);
+	*lst = NULL;
 }
-
-// int	main(void)
-// {
-// 	int	number;
-// 	int fd;
-
-// 	number = (-2147483647 -1);
-// 	fd = 2;
-// 	ft_putnbr_fd(number, fd);
-// 	return (0);
-// }

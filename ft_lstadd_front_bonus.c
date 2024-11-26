@@ -1,43 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 14:11:01 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/26 11:26:21 by allefran         ###   ########.fr       */
+/*   Created: 2024/11/25 10:02:53 by allefran          #+#    #+#             */
+/*   Updated: 2024/11/25 10:22:26 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	long	nb;
-
-	if (fd < 0)
+	if (!lst || !new)
 		return ;
-	nb = n;
-	if (nb < 0)
-	{
-		ft_putchar_fd('-', fd);
-		nb = -nb;
-	}
-	if (nb >= 10)
-	{
-		ft_putnbr_fd(nb / 10, fd);
-	}
-	ft_putchar_fd((nb % 10) + '0', fd);
+	new->next = *lst;
+	*lst = new;
 }
-
-// int	main(void)
-// {
-// 	int	number;
-// 	int fd;
-
-// 	number = (-2147483647 -1);
-// 	fd = 2;
-// 	ft_putnbr_fd(number, fd);
-// 	return (0);
-// }

@@ -1,3 +1,11 @@
+
+.PHONY: all clean fclean re bonus
+
+
+##########################################
+############		FILES		##########
+##########################################
+
 SRC = ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
@@ -24,6 +32,7 @@ SRC = ft_isalpha.c \
 	ft_substr.c \
 	ft_strjoin.c \
 	ft_strtrim.c \
+	ft_split.c \
 	ft_itoa.c \
 	ft_strmapi.c \
 	ft_striteri.c \
@@ -32,35 +41,51 @@ SRC = ft_isalpha.c \
 	ft_putendl_fd.c \
 	ft_putnbr_fd.c
 
-OBJS = $(SRC:.c=.o)
+SRC_BONUS = ft_lstnew_bonus.c \
+	ft_lstadd_front_bonus.c \
+	ft_lstsize_bonus.c \
+	ft_lstlast_bonus.c \
+	ft_lstadd_back_bonus.c \
+	ft_lstdelone_bonus.c \
+	ft_lstclear_bonus.c \
+	ft_lstiter_bonus.c \
+	ft_lstmap_bonus.c
+
+
+##########################################
+##########		VARIABLES		##########
+##########################################
 
 CC = cc
-
+OBJS = $(SRC:.c=.o)
+OBJS_BONUS = $(SRC_BONUS:.c=.o)
 HEADER = libft.h
-
 NAME = libft.a
-
 FLAGS = -Wall -Wextra -Werror
 
 %.o: %.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
 
+
+##########################################
+############		RULES		##########
+##########################################
+
 all: $(NAME)
-
-
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
+bonus:
+	make SRC="$(SRC) $(SRC_BONUS)"
+
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(OBJS_BONUS)
 
-fclean: clean
+fclean: 
 	rm -f $(NAME)
+	$(MAKE) clean
 
-re: fclean all
-
-.PHONY: all clean fclean re
-
-
-
+re:
+	$(MAKE) fclean
+	$(MAKE) all

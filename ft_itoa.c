@@ -6,13 +6,13 @@
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:08:17 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/21 14:34:24 by allefran         ###   ########.fr       */
+/*   Updated: 2024/11/26 11:29:53 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_size(long n)
+static size_t	ft_size(long n)
 {
 	size_t	size;
 

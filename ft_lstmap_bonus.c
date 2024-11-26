@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 11:12:39 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/26 10:15:41 by allefran         ###   ########.fr       */
+/*   Created: 2024/11/25 12:54:17 by allefran          #+#    #+#             */
+/*   Updated: 2024/11/25 16:35:42 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	size_t	i;
+	t_list	*new_list;
+	t_list	*new_node;
+	void	*new_content;
 
-	i = 0;
-	while (s[i])
+	if (!lst || !f || !del)
+		return (NULL);
+	new_list = NULL;
+	while (lst)
 	{
-		if (s[i] == (unsigned char)c)
+		new_content = f(lst->content);
+		new_node = ft_lstnew(new_content);
+		if (!new_node)
 		{
-			return ((char *)s + i);
+			del(new_content);
+			ft_lstclear(&new_list, del);
+			return (NULL);
 		}
-		i++;
+		ft_lstadd_back(&new_list, new_node);
+		lst = lst->next;
 	}
-	if ((unsigned char)c == '\0')
-	{
-		return ((char *)s + i);
-	}
-	return (NULL);
+	return (new_list);
 }
-
-// int	main()
-// {
-// 	char	string[] = "teste";
-// 	int		character = '\0';
-// 	printf("my function: %s\n", ft_strchr(string, character));
-// 	printf("original: %s\n", strchr(string, character));
-
-// 	return (0);
-// }

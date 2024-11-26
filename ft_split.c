@@ -5,125 +5,133 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: allefran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 13:32:51 by allefran          #+#    #+#             */
-/*   Updated: 2024/11/20 14:05:02 by allefran         ###   ########.fr       */
+/*   Created: 2024/11/25 16:40:01 by allefran          #+#    #+#             */
+/*   Updated: 2024/11/26 11:29:41 by allefran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t ft_count_words(const char *s, char c)
+static size_t	ft_count_words(const char *s, char c)
 {
-    size_t nb_words;
-    size_t i;
+	size_t	nb_words;
+	size_t	i;
 
 	nb_words = 0;
 	i = 0;
-    if (s != NULL) 
+	if (s != NULL)
 	{
-        while (s[i]) 
-		{    
-            if (s[i] != c && (i == 0 || s[i - 1] == c)) 
-			{
-                nb_words++;
-            }
-            i++;
-        }
-    }
-    return (nb_words);
-}
-
-int ft_length_words(const char *s, char c, size_t index_s)
-{
-    size_t temp_index;
-
-	temp_index = index_s;
-    while (s[index_s] != c && s[index_s] != '\0') 
-	{
-        index_s++;
-    }
-    return (index_s - temp_index);
-}
-
-char **ft_split_fill(char **new_array, const char *s, char c, size_t nb_words, size_t len_word)
-{
-    size_t index_s;
-    size_t i;
-    size_t j;
-
-	index_s = 0;
-	i = 0;
-    while (i < nb_words) 
-	{
-        j = 0;
-        while (j < len_word) 
+		while (s[i] != '\0')
 		{
-            new_array[i][j] = s[index_s];
-            j++;
-            index_s++;
-        }
-        new_array[i][j] = '\0';  
-        i++;  
-    }
-    new_array[i] = NULL;
-    return (new_array);
+			if (s[i] != c && (i == 0 || s[i - 1] == c))
+			{
+				nb_words++;
+			}
+			i++;
+		}
+	}
+	return (nb_words);
 }
 
-char **ft_split(const char *s, char c)
+static size_t	ft_length_word(const char *s, char c, size_t index)
 {
-    char	**new_array;
-    size_t	nb_words;
-	size_t	len_word;
-	size_t	index
+	size_t	length;
+
+	length = 0;
+	while (s[index] != c && s[index] != '\0')
+	{
+		length++;
+		index++;
+	}
+	return (length);
+}
+
+static char	*ft_allocate_word(const char *s, char c, size_t *index)
+{
+	size_t	length;
+	char	*word;
 	size_t	i;
-	size_t	k;
 
-    if (s == NULL)
-        return NULL;
-
-    nb_words = ft_count_words(s, c);
-    new_array = (char **)malloc(sizeof(char *) * (nb_words + 1));
-    if (new_array == NULL)
-        return NULL;
-
+	while (s[*index] == c && s[*index] != '\0')
+		(*index)++;
+	length = ft_length_word(s, c, *index);
+	word = (char *)malloc(sizeof(char) * (length + 1));
+	if (word == NULL)
+		return (NULL);
 	i = 0;
-	while (new_array[i])
+	while (i < length)
 	{
-        len_word = ft_length_words(s, c, index_s);
-        new_array[i] = (char *)malloc(sizeof(char) * (len_word + 1));
-        if (new_array[i] == NULL) 
+		word[i] = s[*index];
+		i++;
+		(*index)++;
+	}
+	word[i] = '\0';
+	return (word);
+}
+
+static void	ft_free_all(char **array, size_t i)
+{
+	size_t	j;
+
+	j = 0;
+	while (j < i)
+	{
+		free(array[j]);
+		j++;
+	}
+	free(array);
+}
+
+char	**ft_split(const char *s, char c)
+{
+	char	**array;
+	size_t	nb_words;
+	size_t	index;
+	size_t	i;
+
+	if (s == NULL)
+		return (NULL);
+	nb_words = ft_count_words(s, c);
+	array = (char **)malloc(sizeof(char *) * (nb_words + 1));
+	if (array == NULL)
+		return (NULL);
+	index = 0;
+	i = 0;
+	while (i < nb_words)
+	{
+		array[i] = ft_allocate_word(s, c, &index);
+		if (array[i] == NULL)
 		{
-            k = 0;
-            while (k < i) 
-			{
-                free(new_array[k]);
-                k++;
-            }
-            free(new_array);
-            return (NULL);
-        }
+			ft_free_all(array, i);
+			return (NULL);
+		}
 		i++;
 	}
-		
-	new_array = ft_split_fill(new_array, s, c, nb_words);
-    return (new_array);
+	array[i] = NULL;
+	return (array);
 }
 
-int main(void)
-{
-    char *string = "salut je suis alex";
-    char sep = ' ';
-    char **split = ft_split(string, sep);
+// int	main(void)
+// {
+// 	char	*string;
+// 	char	sep;
+// 	char	**split;
+// 	size_t	i;
 
-    
-    size_t i = 0;
-    while (split[i] != NULL) 
-	{
-        printf("%s\n", split[i]);
-        free(split[i]); 
-        i++;
-    }
-    free(split); 
-
-    return 0;
-}
+// 	string = "salut je suis alex";
+// 	sep = ' ';
+// 	split = ft_split(string, sep);
+// 	if (split == NULL)
+// 	{
+// 		return (1);
+// 	}
+// 	i = 0;
+// 	while (split[i] != NULL)
+// 	{
+// 		printf("%s\n", split[i]);
+// 		free(split[i]);
+// 		i++;
+// 	}
+// 	free(split);
+// 	return (0);
+// }
