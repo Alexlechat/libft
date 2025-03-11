@@ -1,91 +1,78 @@
+OBJ_DIR		=	.objects
+SRC_DIR		=	sources
+INC_DIR		=	headers
+PRINTF_DIR	=	ft_printf
+GNL_DIR		=	get_next_line
 
-.PHONY: all clean fclean re bonus
+LIBC 		=	ft_isalpha.c \
+				ft_isdigit.c \
+				ft_isalnum.c \
+				ft_isascii.c \
+				ft_isprint.c \
+				ft_strlen.c \
+				ft_memset.c \
+				ft_bzero.c \
+				ft_memcpy.c \
+				ft_memmove.c \
+				ft_strlcpy.c \
+				ft_strlcat.c \
+				ft_toupper.c \
+				ft_tolower.c \
+				ft_strchr.c \
+				ft_strrchr.c \
+				ft_strncmp.c \
+				ft_memchr.c \
+				ft_memcmp.c \
+				ft_strnstr.c \
+				ft_atoi.c \
+				ft_calloc.c \
+				ft_strdup.c \
+				ft_substr.c \
+				ft_strjoin.c \
+				ft_strtrim.c \
+				ft_split.c \
+				ft_itoa.c \
+				ft_strmapi.c \
+				ft_striteri.c \
+				ft_putchar_fd.c \
+				ft_putstr_fd.c \
+				ft_putendl_fd.c \
+				ft_putnbr_fd.c
 
-
-##########################################
-############		FILES		##########
-##########################################
-
-SRC = ft_isalpha.c \
-	ft_isdigit.c \
-	ft_isalnum.c \
-	ft_isascii.c \
-	ft_isprint.c \
-	ft_strlen.c \
-	ft_memset.c \
-	ft_bzero.c \
-	ft_memcpy.c \
-	ft_memmove.c \
-	ft_strlcpy.c \
-	ft_strlcat.c \
-	ft_toupper.c \
-	ft_tolower.c \
-	ft_strchr.c \
-	ft_strrchr.c \
-	ft_strncmp.c \
-	ft_memchr.c \
-	ft_memcmp.c \
-	ft_strnstr.c \
-	ft_atoi.c \
-	ft_calloc.c \
-	ft_strdup.c \
-	ft_substr.c \
-	ft_strjoin.c \
-	ft_strtrim.c \
-	ft_split.c \
-	ft_itoa.c \
-	ft_strmapi.c \
-	ft_striteri.c \
-	ft_putchar_fd.c \
-	ft_putstr_fd.c \
-	ft_putendl_fd.c \
-	ft_putnbr_fd.c
-
-SRC_BONUS = ft_lstnew_bonus.c \
-	ft_lstadd_front_bonus.c \
-	ft_lstsize_bonus.c \
-	ft_lstlast_bonus.c \
-	ft_lstadd_back_bonus.c \
-	ft_lstdelone_bonus.c \
-	ft_lstclear_bonus.c \
-	ft_lstiter_bonus.c \
-	ft_lstmap_bonus.c
+PRINTFC		=	ft_printf.c \
+				ft_putchar.c \
+				ft_putnbr.c \
+				ft_putptr.c
 
 
-##########################################
-##########		VARIABLES		##########
-##########################################
+GNLC		=	get_next_line.c
 
-CC = cc
-OBJS = $(SRC:.c=.o)
-OBJS_BONUS = $(SRC_BONUS:.c=.o)
-HEADER = libft.h
-NAME = libft.a
-FLAGS = -Wall -Wextra -Werror
+LST_SRCS	=	$(LIBC) $(addprefix $(PRINTF_DIR)/, $(PRINTFC)) $(addprefix $(GNL_DIR)/, $(GNLC))
+LST_INCS	=	ft_printf.h libft.h get_next_line.h
+LST_OBJS	=	$(LST_SRCS:.c=.o)
 
-%.o: %.c $(HEADER)
-	$(CC) $(FLAGS) -c $< -o $@
+SRCS		=	$(addprefix $(SRC_DIR)/, $(LST_SRCS))
+INCS		=	$(addprefix $(INC_DIR)/, $(LST_INCS))
+OBJS		=	$(addprefix $(OBJ_DIR)/, $(LST_OBJS))
 
+CC 			=	cc
+FLAGS		=	-Wall -Wextra -Werror
+LIBFT		=	libft.a
 
-##########################################
-############		RULES		##########
-##########################################
+all:	$(LIBFT)
 
-all: $(NAME)
+$(OBJ_DIR)/%.o:		$(SRC_DIR)/%.c $(INCS) Makefile
+	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/ft_printf $(OBJ_DIR)/get_next_line
+	$(CC) $(FLAGS) -I$(INC_DIR) -c $< -o $@
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-
-bonus:
-	make SRC="$(SRC) $(SRC_BONUS)"
+$(LIBFT):	$(OBJS)
+			ar rcs $(LIBFT) $(OBJS)
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
-fclean: 
-	rm -f $(NAME)
-	$(MAKE) clean
+fclean: clean
+	rm -f $(LIBFT)
 
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+re:	fclean all
