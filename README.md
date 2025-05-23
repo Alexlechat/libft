@@ -4,14 +4,14 @@ Libft est une bibliothèque de fonctions en C réécrites dans le cadre du cursu
 Elle vise à recréer un ensemble de fonctions standards de la bibliothèque C ainsi que quelques utilitaires supplémentaires.  
 Ce projet est une introduction à la programmation bas-niveau, à la rigueur du code en C, et aux bonnes pratiques de développement.
 
-## 📚 Objectifs pédagogiques
+## Objectifs pédagogiques
 
 - Reproduire des fonctions standard de la `libc` (ex: `strlen`, `strcpy`, `memset`, etc.)
 - Comprendre le fonctionnement de la mémoire en C
 - Développer une bibliothèque réutilisable
 - Appliquer les normes de codage 42 (Norminette)
 
-## 🔧 Contenu de la librairie
+## Contenu de la librairie
 
 Libft est divisée en plusieurs catégories :
 
@@ -33,7 +33,7 @@ Libft est divisée en plusieurs catégories :
 - `ft_lstnew`, `ft_lstadd_front`, `ft_lstsize`, `ft_lstlast`
 - `ft_lstdelone`, `ft_lstclear`, `ft_lstiter`, `ft_lstmap`
 
-## 🧪 Compilation
+## Compilation
 
 ```bash
 make        # Compile la librairie
